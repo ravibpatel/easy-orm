@@ -1,0 +1,25 @@
+{
+  "name": "ravibpatel/easy-orm",
+  "type": "library",
+  "description": "Easy to use PHP ORM library.",
+  "keywords": ["php","object relational mapper", "orm", "crud", "mysqli"],
+  "homepage": "https://github.com/ravibpatel/easy-orm",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ravi Patel",
+      "email": "support@rbsoft.org",
+      "homepage": "http://rbsoft.org",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "support@rbsoft.org"
+  },
+  "require": {
+    "php": ">=5.5.0"
+  },
+  "autoload": {
+    "classmap": ["src/"]
+  }
+}
