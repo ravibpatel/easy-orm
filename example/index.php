@@ -6,7 +6,8 @@ define('DB_NAME', 'ezorm');
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-class customer extends Entity {
+class customer extends Entity
+{
     public $name;
 
     public $email;
@@ -14,7 +15,8 @@ class customer extends Entity {
     public $phone;
 }
 
-class insurance extends Entity {
+class insurance extends Entity
+{
 
     public $policyNumber;
 

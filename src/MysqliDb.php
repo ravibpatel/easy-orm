@@ -8,7 +8,7 @@
  * @author    Josh Campbell <jcampbell@ajillion.com>
  * @author    Alexander V. Butenko <a.butenka@gmail.com>
  * @author    Ravi B. Patel <support@rbsoft.org>
- * @copyright Copyright (c) 2010-2018
+ * @copyright Copyright (c) 2010-2019
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU Public License
  * @link      http://github.com/joshcam/PHP-MySQLi-Database-Class
  * @version   2.9.2
@@ -967,18 +967,13 @@ class MysqliDb
      * @param string $whereProp  The name of the database field.
      * @param mixed  $whereValue The value of the database field.
      * @param string $operator   Comparison operator. Default is =
-     * @param bool   $checkEmpty Ignore if $whereValue is null
      * @param string $cond       Condition of where statement (OR, AND)
      *
      * @return MysqliDb
      */
-    public function where($whereProp, $whereValue = 'DBNULL', $operator = '=', $checkEmpty = true, $cond = 'AND')
+    public function where($whereProp, $whereValue = 'DBNULL', $operator = '=', $cond = 'AND')
     {
-        if ($checkEmpty && empty($whereValue)) {
-            return $this;
-        }
-
-        // fork around for an old operation api
+        // forkaround for an old operation api
         if (is_array($whereValue) && ($key = key($whereValue)) != "0") {
             $operator = $key;
             $whereValue = $whereValue[$key];
@@ -1016,13 +1011,12 @@ class MysqliDb
      * @param string $whereProp  The name of the database field.
      * @param mixed  $whereValue The value of the database field.
      * @param string $operator   Comparison operator. Default is =
-     * @param bool   $checkEmpty Ignore if $whereValue is null
      *
      * @return MysqliDb
      */
-    public function orWhere($whereProp, $whereValue = 'DBNULL', $operator = '=', $checkEmpty = true)
+    public function orWhere($whereProp, $whereValue = 'DBNULL', $operator = '=')
     {
-        return $this->where($whereProp, $whereValue, $operator, $checkEmpty, 'OR');
+        return $this->where($whereProp, $whereValue, $operator, 'OR');
     }
 
     /**
@@ -2446,7 +2440,7 @@ class MysqliDb
      */
     public function joinWhere($whereJoin, $whereProp, $whereValue = 'DBNULL', $operator = '=', $cond = 'AND')
     {
-        $this->_joinAnd[$whereJoin][] = Array ($cond, $whereProp, $operator, $whereValue);
+        $this->_joinAnd[self::$prefix . $whereJoin][] = Array ($cond, $whereProp, $operator, $whereValue);
         return $this;
     }
 
